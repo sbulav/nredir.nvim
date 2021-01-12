@@ -3,9 +3,8 @@ nredir.nvim
 
 A [nredir](https://github.com/sbulav/nredir.nvim) Redirect the output of a Vim
 or external command into a scratch buffer, in LUA.
-It's basically an implementation of [Romainl's
-Redir](https://gist.github.com/romainl/eae0a260ab9c135390c30cd370c20cd7),
-written for learn purposes in Lua
+It's basically an implementation of [Romainl's Redir](https://gist.github.com/romainl/eae0a260ab9c135390c30cd370c20cd7),
+written for learn purposes in Lua.
 
 ## Installing
 
