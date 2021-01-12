@@ -40,4 +40,4 @@ nnoremap <leader>R :Nredir <c-f>A
 
 ## Screenshot
 
-[![nredir.nvim](https://media.giphy.com/media/KDUZFl4uFsXwxR9HkU/giphy.gif)](https://gph.is/g/aKQ89xe)
+[![nredir.nvim](https://i.postimg.cc/ZnYSbyQS/out.gif)](https://postimg.cc/cgzjT6Z9)
