@@ -60,7 +60,7 @@ local function set_mappings()
   }
 
   for k,v in pairs(mappings) do
-    vim.api.nvim_buf_set_keymap(buf, 'n', k, ':lua require"result".'..v..'<cr>', {
+    vim.api.nvim_buf_set_keymap(buf, 'n', k, ':lua require"nredir".'..v..'<cr>', {
         nowait = true, noremap = true, silent = true
       })
   end
