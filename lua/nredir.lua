@@ -1,5 +1,4 @@
-local buf, win, start_win
-
+local buf, win
 
 local function close()
   if win and vim.api.nvim_win_is_valid(win) then
@@ -9,13 +8,12 @@ end
 
 local function zoom_toggle()
   local width = vim.api.nvim_get_option('columns')
-    if vim.api.nvim_win_get_width(win) == width then
-        -- change this to a lua call
-        vim.api.nvim_win_set_width(win, math.ceil(width * 0.9))
+  local max_width = math.ceil(width * 0.9)
+  local min_width = math.ceil(width * 0.5)
+    if vim.api.nvim_win_get_width(win) ~= max_width then
+        vim.api.nvim_win_set_width(win, max_width)
     else
-        vim.api.nvim_win_set_width(win, math.ceil(width * 0.5))
-        -- vim.cmd("resize")
-        -- vim.cmd("vertical resize")
+        vim.api.nvim_win_set_width(win, min_width)
     end
 end
 
@@ -67,8 +65,6 @@ local function set_mappings()
 end
 
 local function create_win()
-  -- start_win = vim.api.nvim_get_current_win()
-
   vim.api.nvim_command('botright vnew')
   win = vim.api.nvim_get_current_win()
   buf = vim.api.nvim_get_current_buf()
