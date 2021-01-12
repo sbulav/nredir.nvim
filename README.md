@@ -40,4 +40,4 @@ nnoremap <leader>R :Nredir <c-f>A
 
 ## Screenshot
 
-[![nredir.nvim](TBD)](TBD)
+[![nredir.nvim](https://gph.is/g/aKQ89xe)](https://gph.is/g/aKQ89xe)
