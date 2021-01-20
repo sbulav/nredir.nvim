@@ -17,6 +17,10 @@ local function zoom_toggle()
     end
 end
 
+local function wrap()
+  vim.cmd('set wrap!')
+end
+
 local function starts_with(str, start)
    return str:sub(1, #start) == start
 end
@@ -55,6 +59,7 @@ local function set_mappings()
   local mappings = {
     q = 'close()',
     ['<cr>'] = 'zoom_toggle()',
+    w = 'wrap()',
   }
 
   for k,v in pairs(mappings) do
@@ -76,7 +81,7 @@ local function create_win()
   vim.api.nvim_buf_set_option(0, 'filetype', 'result')
   vim.api.nvim_buf_set_option(0, 'bufhidden', 'wipe')
 
-  vim.api.nvim_command('setlocal nowrap')
+  vim.api.nvim_command('setlocal wrap')
   vim.api.nvim_command('setlocal cursorline')
 
   set_mappings()
@@ -96,4 +101,5 @@ return {
   nredir = nredir,
   close = close,
   zoom_toggle = zoom_toggle,
+  wrap = wrap,
 }

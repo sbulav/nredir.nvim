@@ -28,8 +28,9 @@ Show full output of command `!ls -la` in scratch window:
 :Nredir !ls -la
 ```
 
-- Pressing `q` will automatically close the window
 - Pressing `enter` will maximize scratch window
+- Pressing `q` will automatically close the window
+- Pressing `w` will enable/disable wrap `:h wrap`
 
 You can also create a mapping to open command-line window and substitute
 Nredir:
