@@ -36,17 +36,7 @@ local function redraw(cmd)
     result = vim.fn.systemlist(string.sub(cmd, 2))
   else
     -- Vim EX command
-    vim.api.nvim_set_var('__redir_exec_cmd', cmd)
-    vim.cmd([[
-      redir => g:__redir_exec_output
-        silent! execute g:__redir_exec_cmd
-      redir END
-    ]])
-
-    local tmp = vim.api.nvim_get_var('__redir_exec_output')
-    for s in tmp:gmatch("[^\r\n]+") do
-        table.insert(result, s)
-    end
+    result = vim.fn.split(vim.fn.execute(cmd),'\n')
   end
 
   vim.api.nvim_buf_set_option(buf, 'modifiable', true)
