@@ -11,7 +11,7 @@ written for learn purposes in Lua.
 **NOTE: This plugin requires Neovim 0.5 versions**
 
 ```
-Plug 'sbulav/nredir.lua'
+Plug 'sbulav/nredir.nvim'
 ```
 
 ## Usage
