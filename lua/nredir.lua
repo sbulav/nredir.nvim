@@ -68,7 +68,8 @@ local function set_mappings()
 	end
 end
 
-local function create_win()
+local function create_win(filetype)
+	filetype = (filetype == nil and "result") or filetype
 	vim.api.nvim_command("botright vnew")
 	win = vim.api.nvim_get_current_win()
 	buf = vim.api.nvim_get_current_buf()
@@ -77,7 +78,7 @@ local function create_win()
 
 	vim.api.nvim_buf_set_option(0, "buftype", "nofile")
 	vim.api.nvim_buf_set_option(0, "swapfile", false)
-	vim.api.nvim_buf_set_option(0, "filetype", "result")
+	vim.api.nvim_buf_set_option(0, "filetype", filetype)
 	vim.api.nvim_buf_set_option(0, "bufhidden", "wipe")
 
 	vim.api.nvim_command("setlocal wrap")
@@ -86,11 +87,11 @@ local function create_win()
 	set_mappings()
 end
 
-local function nredir(cmd)
+local function nredir(cmd, filetype)
 	if win and vim.api.nvim_win_is_valid(win) then
 		vim.api.nvim_set_current_win(win)
 	else
-		create_win()
+		create_win(filetype)
 	end
 
 	redraw(cmd)
