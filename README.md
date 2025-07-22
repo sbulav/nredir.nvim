@@ -150,6 +150,10 @@ end, { buffer = true, silent = true, nowait = true })
 ## Screenshots
 
 
+
+https://github.com/user-attachments/assets/3c491e10-17e4-4367-bac3-5c6ab1f9596a
+
+
 ---
 
 ## Credits
