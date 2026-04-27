@@ -120,6 +120,37 @@ function M.nredir(cmd)
     job_id = nil
   end
 
+  if not (cmd and #cmd > 0) then
+    if not (win and vim.api.nvim_win_is_valid(win)) then
+      create_win()
+    else
+      vim.api.nvim_set_current_win(win)
+    end
+    return update_buf { "Error: empty command" }
+  end
+
+  local source_win = vim.api.nvim_get_current_win()
+  local is_shell = cmd:sub(1, 1) == "!"
+  local to_run = is_shell and cmd:sub(2) or cmd
+
+  -- Capture Ex output before switching windows so buffer/cursor-local
+  -- commands run in the invocation context, not the scratch window.
+  local captured_lines
+  if not is_shell then
+    local ok, result
+    local function execute_ex()
+      ok, result = pcall(vim.fn.execute, to_run)
+    end
+
+    if vim.api.nvim_win_is_valid(source_win) then
+      vim.api.nvim_win_call(source_win, execute_ex)
+    else
+      execute_ex()
+    end
+
+    captured_lines = vim.tbl_map(strip_ansi, vim.fn.split(result, "\n"))
+  end
+
   -- open or focus window
   if not (win and vim.api.nvim_win_is_valid(win)) then
     create_win()
@@ -127,17 +158,9 @@ function M.nredir(cmd)
     vim.api.nvim_set_current_win(win)
   end
 
-  if not (cmd and #cmd > 0) then
-    return update_buf { "Error: empty command" }
-  end
-
-  local is_shell = cmd:sub(1, 1) == "!"
-  local to_run = is_shell and cmd:sub(2) or cmd
-
-  -- immediate Ex commands
+  -- write previously captured Ex output
   if not is_shell then
-    local lines = vim.fn.split(vim.fn.execute(to_run), "\n")
-    return update_buf(vim.tbl_map(strip_ansi, lines))
+    return update_buf(captured_lines)
   end
 
   -- start spinner

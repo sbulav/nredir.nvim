@@ -10,7 +10,8 @@ nredir.nvim
 
 ## Features
 
-* 📺 Async execution of shell (`!…`) or Vim Ex commands
+* 📺 Async execution of shell commands (`!…`)
+* 📝 Vim Ex command output captured in the calling window context
 * 🔄 Live ASCII spinner in the scratch buffer while the job runs
 * 🚪 Close (`q`), 🔍 toggle width (`Enter`), ↔ wrap toggle (`w`) out-of-the-box
 * ⚙️ 100% Lua, configurable split command, keymaps, spinner speed
@@ -110,6 +111,12 @@ If you omit `setup{}`, the plugin defaults to the above values.
 " Run a complex shell pipeline:
 :Nredir !sleep 5 && echo "done"
 ```
+
+For Vim Ex commands, `Nredir` runs the command in the window where you called it.
+That means buffer-local and cursor-dependent commands like `map <buffer>`, `syn`,
+`hi`, or `echo line('.')` use the expected context.
+
+If an Ex command fails, the error is shown in the Nredir buffer.
 
 ---
 
